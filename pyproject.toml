@@ -12,6 +12,12 @@ django-distill = "*"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "*"
+isort = "*"
+
+[tool.isort]
+profile = "django"
+line_length = 120
+extend_skip_glob = ["*/migrations/*"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
