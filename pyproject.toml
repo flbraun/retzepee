@@ -9,6 +9,7 @@ license = "GPL-3.0"
 python = "^3.9"
 Django = "*"
 django-distill = "*"
+gunicorn = "*"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "*"
