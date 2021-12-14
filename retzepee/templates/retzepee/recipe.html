@@ -1,0 +1,16 @@
+{% extends "retzepee/base.html" %}
+{% load i18n %}
+
+{% block body %}
+    <h1>{{ recipe.title|title }}</h1>
+
+    <h3>{% trans "Ingredients" %}</h3>
+    <ul>
+        {% for ifr in recipe.ingredientforrecipe_set.all %}
+            <li>{{ ifr.ingredient_amount }} {{ ifr.ingredient_measurement.token }} {{ ifr.ingredient.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>{% trans "Instructions" %}</h3>
+    <section>{{ recipe.instructions|linebreaks }}</section>
+{% endblock %}
