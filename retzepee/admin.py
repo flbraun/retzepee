@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from retzepee.models import Recipe, Measurement, Ingredient, IngredientForRecipe
+from retzepee.models import Ingredient, IngredientForRecipe, Measurement, Recipe
 
 
 class IngredientForRecipeInline(admin.TabularInline):

@@ -1,6 +1,6 @@
 from django.core.management import BaseCommand
 
-from retzepee.models import Measurement, Ingredient, Recipe
+from retzepee.models import Ingredient, Measurement, Recipe
 
 DEFAULT_MEASUREMENTS = [
     ('Teelöffel', 'TL'),
