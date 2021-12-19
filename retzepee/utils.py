@@ -5,6 +5,12 @@ from django.urls import resolve
 from django.views import View
 
 
+def coerce_bool_from_string(string: str) -> bool:
+    if string in ('1', 'true', 'True', 'y', 'Y', 'yes', 'Yes'):
+        return True
+    return False
+
+
 class RetzepeeTestCase(TestCase):
     def assertURLResolvesToView(self, url: str, view_cls: Type[View], msg: Optional[str] = None):
         resolved = resolve(url)
