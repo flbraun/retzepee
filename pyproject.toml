@@ -10,6 +10,7 @@ python = "^3.9"
 Django = "*"
 django-distill = "*"
 gunicorn = "*"
+psycopg2-binary = "*"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "*"
