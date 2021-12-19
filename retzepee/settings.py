@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 import environ
+from django.utils.translation import gettext_lazy as _
 
 from retzepee.utils import coerce_bool_from_string
 
@@ -89,10 +90,15 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'en-us'
+LANGUAGES = [
+    ('en-us', _('English (United States)')),
+    ('de-de', _('German (Germany)')),
+]
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+LOCALE_PATHS = [BASE_DIR / 'locale']
 
 USE_TZ = True
 
