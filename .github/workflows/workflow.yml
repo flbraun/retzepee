@@ -44,7 +44,6 @@ jobs:
           DEBUG: False
           SECRET_KEY: ${{ secrets.CI_SECRET_KEY }}
           ALLOWED_HOSTS: localhost,127.0.0.1
-          INTERNAL_IPS: 127.0.0.1,
           POSTGRES_DB: "retzepeetest"
           POSTGRES_USER: "retzepeetest"
           POSTGRES_PASSWORD: "retzepeetest"
@@ -55,7 +54,6 @@ jobs:
           DEBUG: False
           SECRET_KEY: ${{ secrets.CI_SECRET_KEY }}
           ALLOWED_HOSTS: localhost,127.0.0.1
-          INTERNAL_IPS: 127.0.0.1,
           POSTGRES_DB: "retzepeetest"
           POSTGRES_USER: "retzepeetest"
           POSTGRES_PASSWORD: "retzepeetest"

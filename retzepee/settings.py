@@ -16,7 +16,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS', cast=list)
 
-INTERNAL_IPS = env('INTERNAL_IPS', cast=list)
+INTERNAL_IPS = env('INTERNAL_IPS', cast=list, default=[])
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -70,7 +70,7 @@ DATABASES = {
         'USER': env('POSTGRES_USER'),
         'PASSWORD': env('POSTGRES_PASSWORD'),
         'HOST': env('POSTGRES_HOST'),
-        'PORT': env('POSTGRES_PORT'),
+        'PORT': env('POSTGRES_PORT', default='5432'),
     }
 }
 
@@ -105,6 +105,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = env('STATIC_ROOT', cast=str, default='/static')
 MEDIA_URL = 'media/'
-MEDIA_ROOT = env('MEDIA_ROOT', cast=str, default='/media')
+MEDIA_ROOT = env('MEDIA_ROOT', cast=str, default='/uploads')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
