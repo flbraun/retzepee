@@ -54,6 +54,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -103,5 +104,8 @@ LOCALE_PATHS = [BASE_DIR / 'locale']
 USE_TZ = True
 
 STATIC_URL = 'static/'
+STATIC_ROOT = env('STATIC_ROOT', cast=str, default='/static')
+MEDIA_URL = 'media/'
+MEDIA_ROOT = env('MEDIA_ROOT', cast=str, default='/media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
