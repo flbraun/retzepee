@@ -14,3 +14,50 @@ jobs:
       - run: poetry install
       - run: poetry run isort --check-only .
       - run: poetry run flake8
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14-alpine
+        env:
+          POSTGRES_DB: "retzepeetest"
+          POSTGRES_USER: "retzepeetest"
+          POSTGRES_PASSWORD: "retzepeetest"
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: 1.1.12
+      - run: poetry install
+      - run: poetry run python manage.py makemigrations --check
+        env:
+          DEBUG: False
+          SECRET_KEY: ${{ secrets.CI_SECRET_KEY }}
+          ALLOWED_HOSTS: localhost,127.0.0.1
+          INTERNAL_IPS: 127.0.0.1,
+          POSTGRES_DB: "retzepeetest"
+          POSTGRES_USER: "retzepeetest"
+          POSTGRES_PASSWORD: "retzepeetest"
+          POSTGRES_HOST: "127.0.0.1"
+          POSTGRES_PORT: "5432"
+      - run: poetry run python manage.py test
+        env:
+          DEBUG: False
+          SECRET_KEY: ${{ secrets.CI_SECRET_KEY }}
+          ALLOWED_HOSTS: localhost,127.0.0.1
+          INTERNAL_IPS: 127.0.0.1,
+          POSTGRES_DB: "retzepeetest"
+          POSTGRES_USER: "retzepeetest"
+          POSTGRES_PASSWORD: "retzepeetest"
+          POSTGRES_HOST: "127.0.0.1"
+          POSTGRES_PORT: "5432"
