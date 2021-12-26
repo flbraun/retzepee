@@ -15,6 +15,7 @@ django-environ = "*"
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "*"
 isort = "*"
+flake8 = "*"
 
 [tool.isort]
 profile = "django"
