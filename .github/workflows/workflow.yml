@@ -59,3 +59,19 @@ jobs:
           POSTGRES_PASSWORD: "retzepeetest"
           POSTGRES_HOST: "127.0.0.1"
           POSTGRES_PORT: "5432"
+  build_and_publish:
+    runs-on: ubuntu-latest
+    if: "github.ref_type == 'tag'"
+    needs:
+      - lint
+      - test
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: chiron1991/retzepee:lastest,chiron1991/retzepee:${{ github.ref_name }}
