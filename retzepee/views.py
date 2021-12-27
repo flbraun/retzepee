@@ -1,7 +1,6 @@
-from django.db.models import Prefetch
 from django.views.generic import DetailView
 
-from retzepee.models import IngredientForRecipe, Recipe
+from retzepee.models import Recipe
 
 
 class RecipeView(DetailView):
@@ -9,14 +8,7 @@ class RecipeView(DetailView):
     template_name = 'retzepee/recipe.html'
 
     def get_queryset(self):
-        qs = super().get_queryset()
-        qs = qs.prefetch_related(
-            Prefetch(
-                'ingredientforrecipe_set',
-                queryset=IngredientForRecipe.objects.select_related('ingredient', 'ingredient_measurement')
-            )
-        )
-        return qs
+        return super().get_queryset().prefetch_ingredients()
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)

@@ -1,5 +1,16 @@
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.db.models import Prefetch
+
+
+class RecipeQuerySet(models.QuerySet):
+    def prefetch_ingredients(self):
+        return self.prefetch_related(
+            Prefetch(
+                'ingredientforrecipe_set',
+                queryset=IngredientForRecipe.objects.select_related('ingredient', 'ingredient_measurement')
+            )
+        )
 
 
 class Recipe(models.Model):
@@ -10,6 +21,8 @@ class Recipe(models.Model):
     instructions = models.TextField()
 
     yields_portions = models.SmallIntegerField(null=True, blank=True, validators=[MinValueValidator(1)])
+
+    objects = RecipeQuerySet.as_manager()
 
     def __str__(self):
         return self.title
